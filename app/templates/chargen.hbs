@@ -1,3 +1,4 @@
+{{notification-container notifications=notifications position="top-right"}}
       <div class="container-fluid">
 
 <h1>FS3 3rd Edition Chargen Alpha Test</h1>
@@ -46,32 +47,20 @@ Character Name: {{input type="text" value=model.charName}}
 </table>
 
 
-<div class="row"> 
-<div class="col-sm-4">
-<b>Brawn</b> - Physical strength and toughness.
-</div>
+{{#fs3-attrbox rating=model.brawn updated=(action "validateChar")}}
+    <b>Brawn</b> - Physical strength and toughness.
+{{/fs3-attrbox}}
 
-<div class="col-sm-1">
-<button id="dec-brawn" {{action "decBrawn"}}>-</button>
-</div>
-
-<div class="col-sm-1">
-{{model.brawn}}
-</div>
-
-<div class="col-sm-1">
-<button id="inc-brawn" {{action "incBrawn"}}>+</button>
-</div>
+{{#fs3-attrbox rating=model.perception updated=(action "validateChar")}}
+    <b>Perception</b> - Noticing things and being aware of your surroundings.
+{{/fs3-attrbox}}
 
 
-</div>
-
-Perception	Noticing things and being aware of your surroundings.
+Perception	
 Composure	Cooless under pressure. Willpower.
 Reflexes	Reflexes, dexterity, and hand-eye coordination.
 Wits	Practical intelligence, inventiveness and creativity.
 Presence	Poise and charisma.
-
 
 
 {{model.theme}}
