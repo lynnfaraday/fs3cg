@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Character Sheet</div>
+  
+  <div class="panel-body">
+  
+  <p>Name: {{charName}}</p>
+  
+  <p><b>Attributes</b></p>
+  
+  <ul>
+  {{#each printAttrs as |att|}}
+ 
+  <li>{{att.name}}: {{att.rating}}</li>
+
+  {{/each}}
+  </ul>
+  
+  
+  
+  </div>
+  
+  
+</div>

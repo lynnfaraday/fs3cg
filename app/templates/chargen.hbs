@@ -5,7 +5,10 @@
 
 <p>This is a web-based chargen application to help test <a href="http://aresmush.com/fs3/fs3-3">FS3 3rd Edition</a>.  You are welcome to play around with it to see how chargen works in the new edition.  You can submit feedback below.</p>
 
-  
+<h2>A Word on Points</h2>
+
+Don't worry about how many points you spend here.  Just make up the character the way you envision them.  3rd edition chargen does CG points a little differently, and part of what I'm trying to test here is how to scale them.
+
 <h2>Enter a Name</h2>
 
 Character Name: {{input type="text" value=charName}}
@@ -14,13 +17,13 @@ Character Name: {{input type="text" value=charName}}
   
 <p>Select a theme.  This will configure which skills are available.</p>
 
-
 <select onchange={{action (mut selectedTheme) value="target.value"}}>
   {{#each themes as |tc|}}
     <option value={{tc}} selected={{eq selectedTheme tc}}>{{tc}}</option>
   {{/each}}
 </select>
 
+<p><b>Note:  Changing this will reset your skills.</b></p>
 
 <h2>Pick Attributes</h2>
 
@@ -46,26 +49,219 @@ Character Name: {{input type="text" value=charName}}
 </tbody>
 </table>
 
+{{#if showAttrErrors}}
+<div class="alert alert-danger">
+<ul>
+{{#each attrErrors as |error|}}
+<li>{{error}}</li>
+{{/each}}
+</ul>
+</div>
+{{/if}}
+
+
 {{#fs3-attrbox rating=fs3attrs.brawn updated=(action "validateChar")}}
     <b>Brawn</b> - Physical strength and toughness.
 {{/fs3-attrbox}}
 {{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
     <b>Perception</b> - Noticing things and being aware of your surroundings.
 {{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.composure updated=(action "validateChar")}}
     <b>Composure</b> - Cooless under pressure. Willpower.
 {{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.reflexes updated=(action "validateChar")}}
     <b>Reflexes</b> - Reflexes, dexterity, and hand-eye coordination.
 {{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.wits updated=(action "validateChar")}}
     <b>Wits</b> - Practical intelligence, inventiveness and creativity.
 {{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.presence updated=(action "validateChar")}}
     <b>Presence</b> - Poise and charisma.
 {{/fs3-attrbox}}
 
 
-{{selectedTheme}}
+<h2>Pick Action Skills</h2>
+
+<p>Action Skills represent your training/knowledge in areas that are likely to come up in action/conflict situations during the game.  Action Skills are rated from 0 to 8 based on your training and experience.</p>
+
+<table class="table table-bordered table-striped">
+<tbody>
+<tr>
+<td>0</td><td>Unskilled</td><td>You lack even basic capabilities in this area.</td>
+</tr>
+<tr>
+<td>1</td><td>Everyman</td><td>You know what the average inhabitant of the game world would know.</td>
+</tr>
+<tr>
+<td>2</td><td>Amateur</td><td>You are a hobbyist or student with some basic training.</td>
+</tr>
+<tr>
+<td>3</td><td>Rookie</td><td>You’re a junior professional, trained but lacking experience.</td>
+</tr>
+<tr>
+<td>4</td><td>Professional</td><td>You are a thoroughly competent professional.</td>
+</tr>
+<tr>
+<td>5</td><td>Veteran</td><td>You are a seasoned professional with a fair bit of experience.</td>
+</tr>
+<tr>
+<td>6</td><td>Expert</td><td>You have significant experience to draw upon and are well-regarded in your field.</td>
+</tr>
+<tr>
+<td>7</td><td>Elite</td><td>You are one of the top people in your field, like an All Star athlete or a world-renowned doctor.</td>
+</tr>
+<tr>
+<td>8</td><td>Legend</td><td>You are one of the best that’s ever lived.</td>
+</tr>
+</tbody>
+</table>
+
+<p>A few tips for selecting Action Skills:</p>
+
+<ul>
+<li>The rating name should generally match your professional experience. While some variation is allowed for talent (or lack thereof), be careful not to stray too far. A brand-new pilot with an Elite piloting skill isn’t going to fly (pun intended).</li>
+<li>Ratings 3 or higher imply you’re is good enough to do this for a living. Hobbies don’t need to be that high unless you’re really serious about them.</li>
+<li>Skills are deliberately broad to simplify chargen.  Your character is expected to RP appropriately to their specialties.  For instance, a paramedic cannot perform brain surgery no matter how high their Medicine is.</li>
+<li>Rating 1 (Everyman) is a special rating. It reflects what the average inhabitant of the game world would be capable of. What tasks you can even conceivably attempt with Everyman will vary from skill to skill.</li>
+</ul>
+
+{{#if showLowTech}}
+{{#fs3-actionbox rating=fs3action.archery updated=(action "validateChar")}}
+    <b>Archery</b> - Shooting bows and crossbows. (Reflexes)
+{{/fs3-actionbox}}
+{{/if}}
+
+
+{{#fs3-actionbox rating=fs3action.athletics updated=(action "validateChar")}}
+    <b>Athletics</b> - General running, jumping, climbing, etc. (Brawn)
+{{/fs3-actionbox}}
+
+{{#if show100}}
+{{#fs3-actionbox rating=fs3action.deception updated=(action "validateChar")}}
+    <b>Deception</b> - Lies and cons. (Presence)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#if showHighTech}}
+{{#fs3-actionbox rating=fs3action.demolitions updated=(action "validateChar")}}
+    <b>Demolitions</b> - Blowing stuff up. (Wits)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#fs3-actionbox rating=fs3action.firearms updated=(action "validateChar")}}
+    <b>Firearms</b> - Shooting guns. (Reflexes)
+{{/fs3-actionbox}}
+
+{{#if showHighTech}}
+{{#fs3-actionbox rating=fs3action.gunnery updated=(action "validateChar")}}
+    <b>Gunnery</b> - Vehicle and heavy weapons. (Reflexes)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#fs3-actionbox rating=fs3action.medicine updated=(action "validateChar")}}
+    <b>Medicine</b> - Tending to the ill and injured. (Wits)
+{{/fs3-actionbox}}
+
+{{#fs3-actionbox rating=fs3action.melee updated=(action "validateChar")}}
+    <b>Melee</b> - Fighting with fists, knives, and hand-to-hand weapons. (Brawn)
+{{/fs3-actionbox}}
+
+{{#if show100}}
+{{#fs3-actionbox rating=fs3action.persuasion updated=(action "validateChar")}}
+    <b>Persuasion</b> - Making friends and influencing people. (Presence)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#if showHighTech}}
+{{#fs3-actionbox rating=fs3action.piloting updated=(action "validateChar")}}
+    <b>Piloting</b> - Flying Vipers, Raptors and other airborne vehicles. (Reflexes)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#if showLowTech}}
+{{#fs3-actionbox rating=fs3action.riding updated=(action "validateChar")}}
+    <b>Riding</b> - Riding horses. (Brawn)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#if showLowTech}}
+{{#fs3-actionbox rating=fs3action.scrounge updated=(action "validateChar")}}
+    <b>Scrounge</b> - Knowing where to look to find useful stuff in the ruins. (Wits)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#fs3-actionbox rating=fs3action.stealth updated=(action "validateChar")}}
+    <b>Stealth</b> -Being sneaky. (Reflexes)
+{{/fs3-actionbox}}
+
+{{#if showLowTech}}
+{{#fs3-actionbox rating=fs3action.survival updated=(action "validateChar")}}
+    <b>Survival</b> - Surviving in the wilderness, including trapping/foraging/shelters/navigation. (Wits)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#if show100}}
+{{#fs3-actionbox rating=fs3action.tactics updated=(action "validateChar")}}
+    <b>Tactics</b> - Warfare and tactics. (Wits)
+{{/fs3-actionbox}}
+{{/if}}
+
+{{#fs3-actionbox rating=fs3action.tinkering updated=(action "validateChar")}}
+    <b>Tinkering</b> - Mechanical/electrical tinkering and repair. (Wits)
+{{/fs3-actionbox}}
+
+{{#if show100}}
+{{#fs3-actionbox rating=fs3action.thrown updated=(action "validateChar")}}
+    <b>Thrown</b> - Thrown weapons. (Reflexes)
+{{/fs3-actionbox}}
+{{/if}}
+
+<h2>Background Skills</h2>
+
+Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. Here are some sample Background Skills:
+
+<ul>
+<li>A science - astronomy, biology, chemistry, geology, mathematics, physics, etc.</li>
+<li>A humanity - history, literature, psychology, philosophy, poetry, etc.</li>
+<li>A profession or trade - cook, waitress, bartender, accountant, programmer, carpenter, brewer, blacksmith, etc.</li>
+<li>A game - chess, roleplaying, poker, etc.</li>
+<li>An art - sculpting, painting, sketching, photography, etc.</li>
+<li>A form of expression - acting, singing, dancing, playing an instrument, writing, etc.</li>
+<li>A sport - baseball, football, gymnastics, etc.</li>
+<li>A craft or hobby - gardening, basketweaving, knitting, etc.</li>
+<li>An unusual interest - detective novels, game show hosts, etc.</li>
+</ul>
+
+<p>Tip: You are assumed to be an Everyman in any Background Skill not listed on your character sheet. So even if you don’t take the “football” skill, you’ve still probably played it a few times in gym class in school, watched it on TV, etc. You can always choose to roleplay as Unskilled if it fits better.</p>
+
+<p>Background Skills exist for RP flavor and character depth more than conflict resolution.  Because of that, they are <b>described</b>, not rated.   Just give a short sentence or so describing what your character knows and why.  For example:  <i>Pyramid - Marua played Pyramid in college.  She might have gone pro had she not joined the Navy.</i></p>
+
+<p><i>You can leave any unused skill slots blank.</i></p>
+
+<p>Skill: {{input type="text" value=bgskill1 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill2 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill3 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill4 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill5 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill6 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill7 size=150}}</p>
+<p>Skill: {{input type="text" value=bgskill8 size=150}}</p>
+
+<h2>Languages</h2>
+
+<p>Languages represent the languages that your character can speak and/or read.  Like Background Skills, Languages have no ratings. If you have a Language, you’re assumed to be fluent and literate. You can always RP a lower degree of proficiency if appropriate to your background.</p>
+
+<p><i>You can leave any unused skill slots blank.</i></p>
+
+<p>Language: {{input type="text" value=langskill1 size=150}}</p>
+<p>Language: {{input type="text" value=langskill2 size=150}}</p>
+<p>Language: {{input type="text" value=langskill3 size=150}}</p>
+<p>Language: {{input type="text" value=langskill4 size=150}}</p>
+
+
+
+<h2>Character Sheet</h2>
+
+{{partial "sheet"}}
 
 </div>
