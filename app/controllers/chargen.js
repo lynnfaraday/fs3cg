@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};
 
 export default Ember.Controller.extend({
     
@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
             Ember.Object.create( { name: "Thrown", desc: "Thrown weapons. (Reflexes)" }),
             ];
         }
-        else if (this.get('selectedTheme') == "Battlestar Galactica") {
+        else if (this.get('selectedTheme') === "Battlestar Galactica") {
             
             skills = [
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
@@ -139,7 +139,7 @@ export default Ember.Controller.extend({
         });
         return high;
     },
-
+    
     actions: {
         addBackgroundSkill() {
             this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
@@ -172,6 +172,27 @@ export default Ember.Controller.extend({
                 //this.notifications.error('You have too many attribute points.');
                 this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please note it in the comments.');
             }
+        },
+        submit() {
+            let url = 'https://api.mailgun.net/v3/' + process.env.MAILGUN2_DOMAIN + '/messages';
+            
+            let message = { 
+                crossDomain: true,
+                from: "do-not-reply@aresmush.com", 
+                to: "faraday@aresmush.com", 
+                    username: 'api',
+                    password: process.env.MAILGUN2_API_KEY,
+                subject: "FS3 Character", 
+                text: this.get('comments')};
+            
+                var mailgun = $.ajax({
+                      type: 'POST',
+                      url: url,                    
+                      data: message,
+                      dataType: "json",
+                      success: function(resultData) { alert("Sent!  Thank you!" + resultData) }
+                });
+                mailgun.error(function(resultData) { alert("Something went wrong" + resultData); });
         }
     }
 });
