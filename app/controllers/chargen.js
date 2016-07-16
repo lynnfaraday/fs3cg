@@ -13,6 +13,8 @@ export default Ember.Controller.extend({
     selectedTheme: '100',
     attrErrors: [],
     skillErrors: [],
+    langskills: [],
+    bgskills: [],
     
     init: function() {
         this.notifications.setDefaultAutoClear(true);
@@ -20,6 +22,16 @@ export default Ember.Controller.extend({
     },
     
     resetSkills: function() {
+        let bg = [
+            Ember.Object.create( { name: "Describe a hobby, interest or professional background skill." })
+        ];
+        this.set('bgskills', bg);
+        
+        let lang = [
+            Ember.Object.create( { name: "English" })
+        ];
+        this.set('langskills', lang);
+        
         let attrs = [
             Ember.Object.create( { name: "Brawn", desc: "Physical strength and toughness.", rating: 2 }),
             Ember.Object.create( { name: "Perception", desc: "Noticing things and being aware of your surroundings.", rating: 2 }),
@@ -123,6 +135,12 @@ export default Ember.Controller.extend({
     },
 
     actions: {
+        addBackgroundSkill() {
+            this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
+        },
+        addLanguage() {
+            this.get('langskills').pushObject( Ember.Object.create( { name: "" }) );  
+        },
         validateChar() {
             this.set('attrErrors', []);
             this.set('skillErrors', []);

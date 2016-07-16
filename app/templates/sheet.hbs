@@ -1,3 +1,5 @@
+<br/><br/><hr/><br/><br/>
+
 <div class="panel panel-default">
   <div class="panel-heading">Character Sheet</div>
   
@@ -22,6 +24,27 @@
  
   <li>{{skill.name}}: {{skill.rating}}</li>
 
+  {{/each}}
+  </ul>
+  
+  <p><b>Background Skills</b></p>
+  
+  <ul>
+  {{#each bgskills as |skill|}}
+  
+  <li>{{skill.name}}</li>
+  
+  {{/each}}
+  </ul>
+  
+  
+  <p><b>Languages</b></p>
+  
+  <ul>
+  {{#each langskills as |skill|}}
+  
+  <li>{{skill.name}}</li>
+  
   {{/each}}
   </ul>
   

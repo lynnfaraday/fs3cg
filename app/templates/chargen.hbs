@@ -148,27 +148,24 @@ Background Skills are free-form, so there is no specific list. You can pick anyt
 
 <p>Background Skills exist for RP flavor and character depth more than conflict resolution.  Because of that, they are <b>described</b>, not rated.   Just give a short sentence or so describing what your character knows and why.  For example:  <i>Pyramid - Marua played Pyramid in college.  She might have gone pro had she not joined the Navy.</i></p>
 
-<p><i>You can leave any unused skill slots blank.</i></p>
 
-<p>Skill: {{input type="text" value=bgskill1 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill2 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill3 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill4 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill5 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill6 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill7 size=150}}</p>
-<p>Skill: {{input type="text" value=bgskill8 size=150}}</p>
+{{#each bgskills as |skill|}}
+<p>Skill: {{input type="text" value=skill.name size=150}}</p>
+{{/each}}
+
+<button id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
+
 
 <h2>Languages</h2>
 
 <p>Languages represent the languages that your character can speak and/or read.  Like Background Skills, Languages have no ratings. If you have a Language, you’re assumed to be fluent and literate. You can always RP a lower degree of proficiency if appropriate to your background.</p>
 
-<p><i>You can leave any unused skill slots blank.</i></p>
 
-<p>Language: {{input type="text" value=langskill1 size=150}}</p>
-<p>Language: {{input type="text" value=langskill2 size=150}}</p>
-<p>Language: {{input type="text" value=langskill3 size=150}}</p>
-<p>Language: {{input type="text" value=langskill4 size=150}}</p>
+{{#each langskills as |skill|}}
+<p>Language: {{input type="text" value=skill.name size=150}}</p>
+{{/each}}
+
+<button id="addlang" {{action "addLanguage"}}>Add Language</button>
 
 
 {{partial "sheet"}}
