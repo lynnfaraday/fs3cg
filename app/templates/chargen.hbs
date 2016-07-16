@@ -1,0 +1,79 @@
+      <div class="container-fluid">
+
+<h1>FS3 3rd Edition Chargen Alpha Test</h1>
+
+<p>This is a web-based chargen application to help test <a href="http://aresmush.com/fs3/fs3-3">FS3 3rd Edition</a>.  You are welcome to play around with it to see how chargen works in the new edition.  You can submit feedback below.</p>
+
+  
+<h2>Enter a Name</h2>
+
+Character Name: {{input type="text" value=model.charName}}
+
+<h2>Pick a Theme</h2>
+  
+<p>Select a theme.  This will configure which skills are available.</p>
+
+
+<select onchange={{action (mut model.theme) value="target.value"}}>
+  {{#each themes as |tc|}}
+    <option value={{tc}} selected={{eq model.theme tc}}>{{tc}}</option>
+  {{/each}}
+</select>
+
+
+<h2>Pick Attributes</h2>
+
+<p>Attributes represent basic abilities that everyone has to some extent. Attributes can be used when no skill directly applies. They can also boost related skills.  Attributes are rated 1-5.</p>
+
+<table class="table table-bordered table-striped">
+<tbody>
+<tr>
+<td>1</td><td>Poor</td><td>You are below average. (less than 40th percentile)</td>
+</tr>
+<tr>
+<td>2</td><td>Average</td><td>You are about average. (40-60th percentile)</td>
+</tr>
+<tr>
+<td>3</td><td>Good</td><td>You’re better than average. (60-75th percentile)</td>
+</tr>
+<tr>
+<td>4</td><td>Great</td><td>You are considerably above average. (75-90th percentile)</td>
+</tr>
+<tr>
+<td>5</td><td>Exceptional</td><td>You’re truly remarkable. (more than 90th percentile)</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="row"> 
+<div class="col-sm-4">
+<b>Brawn</b> - Physical strength and toughness.
+</div>
+
+<div class="col-sm-1">
+<button id="dec-brawn" {{action "decBrawn"}}>-</button>
+</div>
+
+<div class="col-sm-1">
+{{model.brawn}}
+</div>
+
+<div class="col-sm-1">
+<button id="inc-brawn" {{action "incBrawn"}}>+</button>
+</div>
+
+
+</div>
+
+Perception	Noticing things and being aware of your surroundings.
+Composure	Cooless under pressure. Willpower.
+Reflexes	Reflexes, dexterity, and hand-eye coordination.
+Wits	Practical intelligence, inventiveness and creativity.
+Presence	Poise and charisma.
+
+
+
+{{model.theme}}
+
+</div>
