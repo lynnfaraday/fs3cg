@@ -49,17 +49,21 @@ Character Name: {{input type="text" value=charName}}
 {{#fs3-attrbox rating=fs3attrs.brawn updated=(action "validateChar")}}
     <b>Brawn</b> - Physical strength and toughness.
 {{/fs3-attrbox}}
-
 {{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
     <b>Perception</b> - Noticing things and being aware of your surroundings.
 {{/fs3-attrbox}}
-
-
-Perception	
-Composure	Cooless under pressure. Willpower.
-Reflexes	Reflexes, dexterity, and hand-eye coordination.
-Wits	Practical intelligence, inventiveness and creativity.
-Presence	Poise and charisma.
+{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+    <b>Composure</b> - Cooless under pressure. Willpower.
+{{/fs3-attrbox}}
+{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+    <b>Reflexes</b> - Reflexes, dexterity, and hand-eye coordination.
+{{/fs3-attrbox}}
+{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+    <b>Wits</b> - Practical intelligence, inventiveness and creativity.
+{{/fs3-attrbox}}
+{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
+    <b>Presence</b> - Poise and charisma.
+{{/fs3-attrbox}}
 
 
 {{selectedTheme}}

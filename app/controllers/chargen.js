@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
     
     themes: [ '100', 'Battlestar Galactica', 'Modern Post-Apocalyptic'],
     charName: 'Test',
-    fs3attrs: Ember.Object.create({ brawn: 1, perception: 1 }),
+    fs3attrs: Ember.Object.create({ brawn: 2, perception: 2, composure: 2, wits: 2, reflexes: 2, presence: 2 }),
     
     init: function() {
         this.notifications.setDefaultAutoClear(true);
