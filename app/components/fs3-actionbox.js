@@ -4,7 +4,7 @@ export default Ember.Component.extend({
     minRating: 0,
     maxRating: 8,
     
-    ratingDescription: function() {
+    getRatingName: function() {
         let name = "";
         
         switch (this.rating) {
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
                 break;
         }
         return name;
-    }.property('rating'),
+    },
     
     actions: { 
         increment() {
@@ -45,6 +45,7 @@ export default Ember.Component.extend({
             if (current < this.get('maxRating')) {
                 this.set('rating',  current + 1);
             }
+            this.set('ratingName', this.getRatingName());
             this.sendAction('updated');
         },
     
@@ -53,6 +54,7 @@ export default Ember.Component.extend({
             if (current > this.get('minRating')) {
                 this.set('rating',  current - 1);
             }
+            this.set('ratingName', this.getRatingName());
             this.sendAction('updated');
         }
     }

@@ -7,12 +7,16 @@
   
   <p>Name: {{charName}}</p>
   
+  <p>Theme: {{selectedTheme}}</p>
+  
+  <p>Concept: {{charConcept}}</p>
+  
   <p><b>Attributes</b></p>
   
   <ul>
   {{#each fs3attrs as |att|}}
  
-  <li>{{att.name}}: {{att.rating}}</li>
+  <li>{{att.name}}: {{att.rating}} ({{att.ratingName}})</li>
 
   {{/each}}
   </ul>
@@ -22,7 +26,7 @@
   <ul>
   {{#each fs3action as |skill|}}
  
-  <li>{{skill.name}}: {{skill.rating}}</li>
+  <li>{{skill.name}}: {{skill.rating}} ({{skill.ratingName}})</li>
 
   {{/each}}
   </ul>

@@ -13,6 +13,12 @@ Don't worry about how many points you spend here.  Just make up the character th
 
 Character Name: {{input type="text" value=charName}}
 
+<h2>Describe Your Concept</h2>
+
+<p>Just give a sentence or two about the character you're making.</p>
+
+{{textarea value=charConcept cols="80" rows="3"}}
+
 <h2>Pick a Theme</h2>
   
 <p>Select a theme.  This will configure which skills are available.</p>
@@ -60,14 +66,14 @@ Character Name: {{input type="text" value=charName}}
 {{/if}}
 
 {{#each fs3attrs as |att|}}
-{{#fs3-attrbox rating=att.rating updated=(action "validateChar")}}
+{{#fs3-attrbox rating=att.rating ratingName=att.ratingName updated=(action "validateChar")}}
     <b>{{att.name}}</b> - {{att.desc}}
 {{/fs3-attrbox}}
 {{/each}}
 
 <h2>Pick Action Skills</h2>
 
-<p>Action Skills represent your training/knowledge in areas that are likely to come up in action/conflict situations during the game.  Action Skills are rated from 0 to 8 based on your training and experience.</p>
+<p>Action Skills represent your training/knowledge in areas that are likely to come up in action/conflict situations during the game.  Action Skills are rated from 0 to 8 based on your training and experience.  If the ratings here aren't clear enough for you, you can get some more guidance from the <a href="http://aresmush.com/fs3/fs3-3/detailed-ratings/">Detailed Skill Rating Examples</a>.</p>
 
 <table class="table table-bordered table-striped">
 <tbody>
@@ -122,7 +128,7 @@ Character Name: {{input type="text" value=charName}}
 {{/if}}
 
 {{#each fs3action as |skill|}}
-{{#fs3-actionbox rating=skill.rating updated=(action "validateChar")}}
+{{#fs3-actionbox rating=skill.rating ratingName=skill.ratingName updated=(action "validateChar")}}
     <b>{{skill.name}}</b> - {{skill.desc}}
 {{/fs3-actionbox}}
 {{/each}}
