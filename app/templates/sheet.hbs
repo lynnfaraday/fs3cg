@@ -15,7 +15,15 @@
   {{/each}}
   </ul>
   
+  <p><b>Action Skills</b></p>
   
+  <ul>
+  {{#each fs3action as |skill|}}
+ 
+  <li>{{skill.name}}: {{skill.rating}}</li>
+
+  {{/each}}
+  </ul>
   
   </div>
   

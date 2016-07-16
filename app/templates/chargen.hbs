@@ -110,96 +110,23 @@ Character Name: {{input type="text" value=charName}}
 <li>Rating 1 (Everyman) is a special rating. It reflects what the average inhabitant of the game world would be capable of. What tasks you can even conceivably attempt with Everyman will vary from skill to skill.</li>
 </ul>
 
-{{#if showLowTech}}
-{{#fs3-actionbox rating=fs3action.archery updated=(action "validateChar")}}
-    <b>Archery</b> - Shooting bows and crossbows. (Reflexes)
-{{/fs3-actionbox}}
+
+{{#if showSkillErrors}}
+<div class="alert alert-danger">
+<ul>
+{{#each skillErrors as |error|}}
+<li>{{error}}</li>
+{{/each}}
+</ul>
+</div>
 {{/if}}
 
-
-{{#fs3-actionbox rating=fs3action.athletics updated=(action "validateChar")}}
-    <b>Athletics</b> - General running, jumping, climbing, etc. (Brawn)
+{{#each fs3action as |skill|}}
+{{#fs3-actionbox rating=skill.rating updated=(action "validateChar")}}
+    <b>{{skill.name}}</b> - {{skill.desc}}
 {{/fs3-actionbox}}
+{{/each}}
 
-{{#if show100}}
-{{#fs3-actionbox rating=fs3action.deception updated=(action "validateChar")}}
-    <b>Deception</b> - Lies and cons. (Presence)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#if showHighTech}}
-{{#fs3-actionbox rating=fs3action.demolitions updated=(action "validateChar")}}
-    <b>Demolitions</b> - Blowing stuff up. (Wits)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#fs3-actionbox rating=fs3action.firearms updated=(action "validateChar")}}
-    <b>Firearms</b> - Shooting guns. (Reflexes)
-{{/fs3-actionbox}}
-
-{{#if showHighTech}}
-{{#fs3-actionbox rating=fs3action.gunnery updated=(action "validateChar")}}
-    <b>Gunnery</b> - Vehicle and heavy weapons. (Reflexes)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#fs3-actionbox rating=fs3action.medicine updated=(action "validateChar")}}
-    <b>Medicine</b> - Tending to the ill and injured. (Wits)
-{{/fs3-actionbox}}
-
-{{#fs3-actionbox rating=fs3action.melee updated=(action "validateChar")}}
-    <b>Melee</b> - Fighting with fists, knives, and hand-to-hand weapons. (Brawn)
-{{/fs3-actionbox}}
-
-{{#if show100}}
-{{#fs3-actionbox rating=fs3action.persuasion updated=(action "validateChar")}}
-    <b>Persuasion</b> - Making friends and influencing people. (Presence)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#if showHighTech}}
-{{#fs3-actionbox rating=fs3action.piloting updated=(action "validateChar")}}
-    <b>Piloting</b> - Flying Vipers, Raptors and other airborne vehicles. (Reflexes)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#if showLowTech}}
-{{#fs3-actionbox rating=fs3action.riding updated=(action "validateChar")}}
-    <b>Riding</b> - Riding horses. (Brawn)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#if showLowTech}}
-{{#fs3-actionbox rating=fs3action.scrounge updated=(action "validateChar")}}
-    <b>Scrounge</b> - Knowing where to look to find useful stuff in the ruins. (Wits)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#fs3-actionbox rating=fs3action.stealth updated=(action "validateChar")}}
-    <b>Stealth</b> -Being sneaky. (Reflexes)
-{{/fs3-actionbox}}
-
-{{#if showLowTech}}
-{{#fs3-actionbox rating=fs3action.survival updated=(action "validateChar")}}
-    <b>Survival</b> - Surviving in the wilderness, including trapping/foraging/shelters/navigation. (Wits)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#if show100}}
-{{#fs3-actionbox rating=fs3action.tactics updated=(action "validateChar")}}
-    <b>Tactics</b> - Warfare and tactics. (Wits)
-{{/fs3-actionbox}}
-{{/if}}
-
-{{#fs3-actionbox rating=fs3action.tinkering updated=(action "validateChar")}}
-    <b>Tinkering</b> - Mechanical/electrical tinkering and repair. (Wits)
-{{/fs3-actionbox}}
-
-{{#if show100}}
-{{#fs3-actionbox rating=fs3action.thrown updated=(action "validateChar")}}
-    <b>Thrown</b> - Thrown weapons. (Reflexes)
-{{/fs3-actionbox}}
-{{/if}}
 
 <h2>Background Skills</h2>
 
@@ -243,7 +170,6 @@ Background Skills are free-form, so there is no specific list. You can pick anyt
 <p>Language: {{input type="text" value=langskill3 size=150}}</p>
 <p>Language: {{input type="text" value=langskill4 size=150}}</p>
 
-<h2>Character Sheet</h2>
 
 {{partial "sheet"}}
 
