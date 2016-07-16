@@ -143,7 +143,7 @@ export default Ember.Controller.extend({
     
     mailgun: function() {
         return ENV.MAILGUN2_DOMAIN;
-    },
+    }.property(),
     
     actions: {
         addBackgroundSkill() {
