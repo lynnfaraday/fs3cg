@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'config/environment';
+import ENV from 'fs3cg/config/environment';
 
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
