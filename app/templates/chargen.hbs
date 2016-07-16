@@ -59,26 +59,11 @@ Character Name: {{input type="text" value=charName}}
 </div>
 {{/if}}
 
-
-{{#fs3-attrbox rating=fs3attrs.brawn updated=(action "validateChar")}}
-    <b>Brawn</b> - Physical strength and toughness.
+{{#each fs3attrs as |att|}}
+{{#fs3-attrbox rating=att.rating updated=(action "validateChar")}}
+    <b>{{att.name}}</b> - {{att.desc}}
 {{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
-    <b>Perception</b> - Noticing things and being aware of your surroundings.
-{{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.composure updated=(action "validateChar")}}
-    <b>Composure</b> - Cooless under pressure. Willpower.
-{{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.reflexes updated=(action "validateChar")}}
-    <b>Reflexes</b> - Reflexes, dexterity, and hand-eye coordination.
-{{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.wits updated=(action "validateChar")}}
-    <b>Wits</b> - Practical intelligence, inventiveness and creativity.
-{{/fs3-attrbox}}
-{{#fs3-attrbox rating=fs3attrs.presence updated=(action "validateChar")}}
-    <b>Presence</b> - Poise and charisma.
-{{/fs3-attrbox}}
-
+{{/each}}
 
 <h2>Pick Action Skills</h2>
 
@@ -257,8 +242,6 @@ Background Skills are free-form, so there is no specific list. You can pick anyt
 <p>Language: {{input type="text" value=langskill2 size=150}}</p>
 <p>Language: {{input type="text" value=langskill3 size=150}}</p>
 <p>Language: {{input type="text" value=langskill4 size=150}}</p>
-
-
 
 <h2>Character Sheet</h2>
 
