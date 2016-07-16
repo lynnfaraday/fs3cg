@@ -8,16 +8,16 @@
   
 <h2>Enter a Name</h2>
 
-Character Name: {{input type="text" value=model.charName}}
+Character Name: {{input type="text" value=charName}}
 
 <h2>Pick a Theme</h2>
   
 <p>Select a theme.  This will configure which skills are available.</p>
 
 
-<select onchange={{action (mut model.theme) value="target.value"}}>
+<select onchange={{action (mut selectedTheme) value="target.value"}}>
   {{#each themes as |tc|}}
-    <option value={{tc}} selected={{eq model.theme tc}}>{{tc}}</option>
+    <option value={{tc}} selected={{eq selectedTheme tc}}>{{tc}}</option>
   {{/each}}
 </select>
 
@@ -46,12 +46,11 @@ Character Name: {{input type="text" value=model.charName}}
 </tbody>
 </table>
 
-
-{{#fs3-attrbox rating=model.brawn updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.brawn updated=(action "validateChar")}}
     <b>Brawn</b> - Physical strength and toughness.
 {{/fs3-attrbox}}
 
-{{#fs3-attrbox rating=model.perception updated=(action "validateChar")}}
+{{#fs3-attrbox rating=fs3attrs.perception updated=(action "validateChar")}}
     <b>Perception</b> - Noticing things and being aware of your surroundings.
 {{/fs3-attrbox}}
 
@@ -63,6 +62,6 @@ Wits	Practical intelligence, inventiveness and creativity.
 Presence	Poise and charisma.
 
 
-{{model.theme}}
+{{selectedTheme}}
 
 </div>
