@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'config/environment';
 
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -140,6 +141,10 @@ export default Ember.Controller.extend({
         return high;
     },
     
+    mailgun: function() {
+        return ENV.MAILGUN2_DOMAIN;
+    },
+    
     actions: {
         addBackgroundSkill() {
             this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
@@ -174,14 +179,14 @@ export default Ember.Controller.extend({
             }
         },
         submit() {
-            let url = 'https://api.mailgun.net/v3/' + process.env.MAILGUN2_DOMAIN + '/messages';
+            let url = 'https://api.mailgun.net/v3/' + ENV.MAILGUN2_DOMAIN + '/messages';
             
             let message = { 
                 crossDomain: true,
                 from: "do-not-reply@aresmush.com", 
                 to: "faraday@aresmush.com", 
                     username: 'api',
-                    password: process.env.MAILGUN2_API_KEY,
+                    password: ENV.MAILGUN2_API_KEY,
                 subject: "FS3 Character", 
                 text: this.get('comments')};
             
