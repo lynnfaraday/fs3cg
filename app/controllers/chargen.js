@@ -15,6 +15,7 @@ export default Ember.Controller.extend({
     skillErrors: [],
     langskills: [],
     bgskills: [],
+    powerLevel: 0,
     
     init: function() {
         this.notifications.setDefaultAutoClear(true);
@@ -125,9 +126,33 @@ export default Ember.Controller.extend({
                 totalAttrs = totalAttrs + rating - 2;
             } 
         });
-        return totalAttrs;
+        return totalAttrs * 2;
     },
     
+    skillPoints: function() {
+        let totalSkills = 0;
+        let fa = this.get('fs3action');
+        
+        Object.keys(fa).forEach(function (key) {
+            let rating = fa[key]['rating'];
+            if (rating > 1) {
+                totalSkills = totalSkills + rating - 1;
+            } 
+        });
+        
+        let numBg = this.get('bgskills').length;
+        if (numBg > 3)
+        {
+            totalSkills = totalSkills + numBg - 3;
+        }
+        
+        let numLang = this.get('langskills').length;
+        if (numLang > 1)
+        {
+            totalSkills = totalSkills + numLang - 1;
+        }
+        return totalSkills;
+    },    
     countHigh: function(stats, highLimit) {     
         let high = 0;
         Object.keys(stats).forEach(function (key) {
@@ -138,39 +163,47 @@ export default Ember.Controller.extend({
         });
         return high;
     },
+    validateChar: function() {
+        this.set('attrErrors', []);
+        this.set('skillErrors', []);
+        
+        let highAttrs = this.countHigh(this.get('fs3attrs'), 5);
+        let highSkills = this.countHigh(this.get('fs3action'), 5);
+        
+        if (highAttrs > 1)
+        {
+            //this.notifications.error('You can only have one attribute at 5.');
+            this.attrErrors.push('You can only have one attribute at 5.  If you think this limit is bad, please send feedback when you are done.');
+        }
+        
+        if (highSkills > 3)
+        {
+            this.skillErrors.push('You can only have 3 skills at 5+.  If you think this limit is bad, please send feedback when you are done.');
+        }
+        
+        let totalAttrs = this.attrPoints();
+        let totalSkills = this.skillPoints();
+        
+        if (totalAttrs > 12)
+        {
+            //this.notifications.error('You have too many attribute points.');
+            this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please note it in the comments.');
+        }
+        
+        this.set('powerLevel', totalSkills + totalAttrs);
+    },
     
     actions: {
         addBackgroundSkill() {
             this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
+            this.validateChar();
         },
         addLanguage() {
             this.get('langskills').pushObject( Ember.Object.create( { name: "" }) );  
+            this.validateChar();
         },
-        validateChar() {
-            this.set('attrErrors', []);
-            this.set('skillErrors', []);
-            
-            let highAttrs = this.countHigh(this.get('fs3attrs'), 5);
-            let highSkills = this.countHigh(this.get('fs3action'), 5);
-            
-            if (highAttrs > 1)
-            {
-                //this.notifications.error('You can only have one attribute at 5.');
-                this.attrErrors.push('You can only have one attribute at 5.  If you think this limit is bad, please note it in the comments.');
-            }
-            
-            if (highSkills > 3)
-            {
-                this.skillErrors.push('You can only have 3 skills at 5+.  If you think this limit is bad, please note it in the comments.');
-            }
-            
-            let totalAttrs = this.attrPoints();
-            
-            if (totalAttrs * 2 > 12)
-            {
-                //this.notifications.error('You have too many attribute points.');
-                this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please note it in the comments.');
-            }
+        abilityChanged() {
+            this.validateChar();
         }
     }
 });

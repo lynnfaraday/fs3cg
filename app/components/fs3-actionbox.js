@@ -12,28 +12,28 @@ export default Ember.Component.extend({
                 name = "Unskilled";
                 break;
             case 1:
-                name = "Everyman";
+                name = "Everyman / Average";
                 break;
             case 2:
-                name =  "Amateur";
+                name =  "Amateur / Mediocre";
                 break;
             case 3:
-                name =  "Rookie";
+                name =  "Rookie / Fair";
                 break;
             case 4:
-                name =  "Professional";
+                name =  "Professional / Good";
                 break;
             case 5:
-                name = "Veteran";
+                name = "Veteran / Great";
                 break;
             case 6:
-                name = "Expert";
+                name = "Expert / Superb";
                 break;
             case 7:
-                name = "Elite";
+                name = "Elite / Exceptional";
                 break;
             case 8:
-                name = "Legend";
+                name = "Legend / Legendary";
                 break;
         }
         return name;

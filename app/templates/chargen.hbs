@@ -73,7 +73,7 @@ Character Name: {{input type="text" value=charName}}
 {{/if}}
 
 {{#each fs3attrs as |att|}}
-{{#fs3-attrbox rating=att.rating ratingName=att.ratingName updated=(action "validateChar")}}
+{{#fs3-attrbox rating=att.rating ratingName=att.ratingName updated=(action "abilityChanged")}}
     <b>{{att.name}}</b> - {{att.desc}}
 {{/fs3-attrbox}}
 {{/each}}
@@ -88,28 +88,28 @@ Character Name: {{input type="text" value=charName}}
 <td>0</td><td>Unskilled</td><td>You lack even basic capabilities in this area.</td>
 </tr>
 <tr>
-<td>1</td><td>Everyman</td><td>You know what the average inhabitant of the game world would know.</td>
+<td>1</td><td>Everyman / Average</td><td>You know what the average inhabitant of the game world would know.</td>
 </tr>
 <tr>
-<td>2</td><td>Amateur</td><td>You are a hobbyist or student with some basic training.</td>
+<td>2</td><td>Amateur / Mediocre</td><td>You are a hobbyist or student with some basic training.</td>
 </tr>
 <tr>
-<td>3</td><td>Rookie</td><td>You’re a junior professional, trained but lacking experience.</td>
+<td>3</td><td>Rookie / Fair</td><td>You’re a junior professional, trained but lacking experience.</td>
 </tr>
 <tr>
-<td>4</td><td>Professional</td><td>You are a thoroughly competent professional.</td>
+<td>4</td><td>Professional / Good</td><td>You are a thoroughly competent professional.</td>
 </tr>
 <tr>
-<td>5</td><td>Veteran</td><td>You are a seasoned professional with a fair bit of experience.</td>
+<td>5</td><td>Veteran / Great</td><td>You are a seasoned professional with a fair bit of experience.</td>
 </tr>
 <tr>
-<td>6</td><td>Expert</td><td>You have significant experience to draw upon and are well-regarded in your field.</td>
+<td>6</td><td>Expert / Superb</td><td>You have significant experience to draw upon and are well-regarded in your field.</td>
 </tr>
 <tr>
-<td>7</td><td>Elite</td><td>You are one of the top people in your field, like an All Star athlete or a world-renowned doctor.</td>
+<td>7</td><td>Elite / Exceptional</td><td>You are one of the top people in your field, like an All Star athlete or a world-renowned doctor.</td>
 </tr>
 <tr>
-<td>8</td><td>Legend</td><td>You are one of the best that’s ever lived.</td>
+<td>8</td><td>Legend / Legendary</td><td>You are one of the best that’s ever lived.</td>
 </tr>
 </tbody>
 </table>
@@ -135,7 +135,7 @@ Character Name: {{input type="text" value=charName}}
 {{/if}}
 
 {{#each fs3action as |skill|}}
-{{#fs3-actionbox rating=skill.rating ratingName=skill.ratingName updated=(action "validateChar")}}
+{{#fs3-actionbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
     <b>{{skill.name}}</b> - {{skill.desc}}
 {{/fs3-actionbox}}
 {{/each}}
