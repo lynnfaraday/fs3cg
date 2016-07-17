@@ -141,6 +141,10 @@ export default Ember.Controller.extend({
         return high;
     },
     
+    mailgun: function() {
+        return ENV.MAILGUN2_DOMAIN;
+    }.property(),
+    
     actions: {
         addBackgroundSkill() {
             this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
@@ -173,6 +177,27 @@ export default Ember.Controller.extend({
                 //this.notifications.error('You have too many attribute points.');
                 this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please note it in the comments.');
             }
+        },
+        submit() {
+            let url = 'https://api.mailgun.net/v3/' + ENV.MAILGUN2_DOMAIN + '/messages';
+            
+            let message = { 
+                crossDomain: true,
+                from: "do-not-reply@aresmush.com", 
+                to: "faraday@aresmush.com", 
+                    username: 'api',
+                    password: ENV.MAILGUN2_API_KEY,
+                subject: "FS3 Character", 
+                text: this.get('comments')};
+            
+                var mailgun = $.ajax({
+                      type: 'POST',
+                      url: url,                    
+                      data: message,
+                      dataType: "json",
+                      success: function(resultData) { alert("Sent!  Thank you!" + resultData) }
+                });
+                mailgun.error(function(resultData) { alert("Something went wrong" + resultData); });
         }
     }
 });
