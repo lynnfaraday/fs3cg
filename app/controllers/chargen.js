@@ -181,7 +181,7 @@ export default Ember.Controller.extend({
             this.attrErrors.push('You can only have one attribute at 5.  If you think this limit is bad, please send feedback when you are done.');
         }
         
-        if (highAttrs2 > 1)
+        if (highAttrs2 > 2)
         {
             //this.notifications.error('You can only have one attribute at 5.');
             this.attrErrors.push('You can only have two attributes at 4+.  If you think this limit is bad, please send feedback when you are done.');
