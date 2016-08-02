@@ -46,6 +46,7 @@ export default Ember.Controller.extend({
         let skills = [];
         if (this.get('selectedTheme') === "100") {
             skills = [
+            Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
             Ember.Object.create( { name: "Archery", desc: "Shooting bows and crossbows. (Reflexes)" }),
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
             Ember.Object.create( { name: "Deception", desc: "Lies and cons. (Presence)" }),
@@ -65,6 +66,7 @@ export default Ember.Controller.extend({
         else if (this.get('selectedTheme') === "Battlestar Galactica") {
             
             skills = [
+            Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
             Ember.Object.create( { name: "Demolitions", desc: "Blowing stuff up. (Wits)" }),
             Ember.Object.create( { name: "Firearms", desc: "Shooting guns. (Reflexes)" }),
@@ -78,6 +80,7 @@ export default Ember.Controller.extend({
         }
         else {
             skills = [
+            Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
             Ember.Object.create( { name: "Archery", desc: "Shooting bows and crossbows. (Reflexes)" }),
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
             Ember.Object.create( { name: "Demolitions", desc: "Blowing stuff up. (Wits)" }),
@@ -168,7 +171,9 @@ export default Ember.Controller.extend({
         this.set('skillErrors', []);
         
         let highAttrs = this.countHigh(this.get('fs3attrs'), 5);
-        let highSkills = this.countHigh(this.get('fs3action'), 5);
+        let highAttrs2 = this.countHigh(this.get('fs3attrs'), 4);
+        let highSkills = this.countHigh(this.get('fs3action'), 8);
+        let highSkills2 = this.countHigh(this.get('fs3action'), 5);
         
         if (highAttrs > 1)
         {
@@ -176,7 +181,18 @@ export default Ember.Controller.extend({
             this.attrErrors.push('You can only have one attribute at 5.  If you think this limit is bad, please send feedback when you are done.');
         }
         
-        if (highSkills > 3)
+        if (highAttrs2 > 1)
+        {
+            //this.notifications.error('You can only have one attribute at 5.');
+            this.attrErrors.push('You can only have two attributes at 4+.  If you think this limit is bad, please send feedback when you are done.');
+        }
+
+        if (highSkills > 1)
+        {
+            this.skillErrors.push('You can only have 1 skill at 8.  If you think this limit is bad, please send feedback when you are done.');
+        }
+                
+        if (highSkills2 > 3)
         {
             this.skillErrors.push('You can only have 3 skills at 5+.  If you think this limit is bad, please send feedback when you are done.');
         }
@@ -184,10 +200,10 @@ export default Ember.Controller.extend({
         let totalAttrs = this.attrPoints();
         let totalSkills = this.skillPoints();
         
-        if (totalAttrs > 12)
+        if (totalAttrs > 16)
         {
             //this.notifications.error('You have too many attribute points.');
-            this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please note it in the comments.');
+            this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please send feedback when you are done.');
         }
         
         this.set('powerLevel', totalSkills + totalAttrs);
@@ -204,6 +220,33 @@ export default Ember.Controller.extend({
         },
         abilityChanged() {
             this.validateChar();
-        }
+        },
+        
+        submit() {
+            let url = 'http://localhost:9292/create';
+            
+            let char = 
+            {
+                char: {
+                    name: this.get('charName'),
+                    skills: 'Skills'
+                }
+            };
+       
+                
+                $.ajax({type: 'POST',
+                      url: url,                    
+                      data: char,
+                      dataType: "json",
+                
+                success: function(resultData) { 
+                    alert("Yay we created " + resultData['char']); },
+                
+                error: function(xhr){
+                    alert("An error occured: " + xhr.status + " " + xhr.statusText);
+                    }});
+                        
+                        
+         }
     }
 });
