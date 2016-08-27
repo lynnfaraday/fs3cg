@@ -35,11 +35,11 @@ export default Ember.Controller.extend({
         
         let attrs = [
             Ember.Object.create( { name: "Brawn", desc: "Physical strength and toughness.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Perception", desc: "Noticing things and being aware of your surroundings.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Composure", desc: "Cooless under pressure. Willpower..", rating: 2, ratingName: 'Average' }),
             Ember.Object.create( { name: "Reflexes", desc: "Reflexes, dexterity, and hand-eye coordination.", rating: 2, ratingName: 'Average' }),
+            Ember.Object.create( { name: "Grit", desc: "Willpower and determination.", rating: 2, ratingName: 'Average' }),
             Ember.Object.create( { name: "Wits", desc: "Practical intelligence, inventiveness and creativity.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Presence", desc: "Poise and charisma.", rating: 2, ratingName: 'Average' }),
+            Ember.Object.create( { name: "Perception", desc: "Noticing things and being aware of your surroundings.", rating: 2, ratingName: 'Average' }),
+            Ember.Object.create( { name: "Presence", desc: "Charisma and beauty.", rating: 2, ratingName: 'Average' }),
         ];
         this.set('fs3attrs', attrs);
         
@@ -55,7 +55,7 @@ export default Ember.Controller.extend({
             Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
             Ember.Object.create( { name: "Persuasion", desc: "Making friends and influencing people. (Presence)" }),
             Ember.Object.create( { name: "Riding", desc: "Riding horses. (Brawn)" }),
-            Ember.Object.create( { name: "Scrounge", desc: "Knowing where to look to find useful stuff in the ruins. (Wits)" }),
+            Ember.Object.create( { name: "Scrounge", desc: "Knowing where to look to find useful stuff in the ruins. (Perception)" }),
             Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
             Ember.Object.create( { name: "Survival", desc: "Surviving in the wilderness, including trapping/foraging/shelters/navigation. (Wits)" }),
             Ember.Object.create( { name: "Tactics", desc: "Warfare and tactics. (Wits)" }),
@@ -68,14 +68,15 @@ export default Ember.Controller.extend({
             skills = [
             Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
+            Ember.Object.create( { name: "Composure", desc: "Coolness under pressure. (Grit)" }),
             Ember.Object.create( { name: "Demolitions", desc: "Blowing stuff up. (Wits)" }),
             Ember.Object.create( { name: "Firearms", desc: "Shooting guns. (Reflexes)" }),
-            Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
             Ember.Object.create( { name: "Gunnery", desc: "Vehicle and heavy weapons. (Reflexes)" }),
+            Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
             Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
             Ember.Object.create( { name: "Piloting", desc: "Flying Vipers, Raptors and airborne vehicles. (Reflexes)" }),
             Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
-            Ember.Object.create( { name: "Tinkering", desc: "Mechanical/electrical tinkering and repair. (Wits)" })
+            Ember.Object.create( { name: "Technician", desc: "Mechanics, electronics and computers.. (Wits)" })
             ];           
         }
         else {
@@ -89,7 +90,7 @@ export default Ember.Controller.extend({
             Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
             Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
             Ember.Object.create( { name: "Riding", desc: "Riding horses. (Brawn)" }),
-            Ember.Object.create( { name: "Scrounge", desc: "Knowing where to look to find useful stuff in the ruins. (Wits)" }),
+            Ember.Object.create( { name: "Scrounge", desc: "Knowing where to look to find useful stuff in the ruins. (Perception)" }),
             Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
             Ember.Object.create( { name: "Survival", desc: "Surviving in the wilderness, including trapping/foraging/shelters/navigation. (Wits)" }),
             Ember.Object.create( { name: "Tinkering", desc: "Mechanical/electrical tinkering and repair. (Wits)" })
@@ -101,7 +102,7 @@ export default Ember.Controller.extend({
             skill.set('ratingName', 'Everyman');
         });
         
-            Ember.Object.create({ archery: 1, athletics: 1, firearms: 1, medicine: 1, melee: 1, tinkering: 1, stealth: 1, thrown: 1, gunnery: 1, piloting: 1, demolitions: 1, deception: 1, persuasion: 1, riding: 1, survival: 1, tactics: 1, scrounge: 1});
+            Ember.Object.create({ archery: 1, athletics: 1, firearms: 1, medicine: 1, melee: 1, technician: 1, stealth: 1, thrown: 1, gunnery: 1, piloting: 1, demolitions: 1, deception: 1, persuasion: 1, riding: 1, survival: 1, tinkering:1, tactics: 1, scrounge: 1});
         this.set('fs3action', skills);
     }.observes('selectedTheme'),
     
@@ -172,7 +173,7 @@ export default Ember.Controller.extend({
         
         let highAttrs = this.countHigh(this.get('fs3attrs'), 5);
         let highAttrs2 = this.countHigh(this.get('fs3attrs'), 4);
-        let highSkills = this.countHigh(this.get('fs3action'), 8);
+        let highSkills = this.countHigh(this.get('fs3action'), 7);
         let highSkills2 = this.countHigh(this.get('fs3action'), 5);
         
         if (highAttrs > 1)
@@ -189,7 +190,7 @@ export default Ember.Controller.extend({
 
         if (highSkills > 1)
         {
-            this.skillErrors.push('You can only have 1 skill at 8.  If you think this limit is bad, please send feedback when you are done.');
+            this.skillErrors.push('You can only have 1 skill at 7+.  If you think this limit is bad, please send feedback when you are done.');
         }
                 
         if (highSkills2 > 3)
