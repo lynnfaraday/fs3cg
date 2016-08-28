@@ -88,28 +88,28 @@ Character Name: {{input type="text" value=charName}}
 <td>0</td><td>Unskilled</td><td>You lack even basic capabilities in this area.</td>
 </tr>
 <tr>
-<td>1</td><td>Everyman / Average</td><td>You know what the average inhabitant of the game world would know.</td>
+<td>1</td><td>Everyman</td><td>You know what the average inhabitant of the game world would know.</td>
 </tr>
 <tr>
-<td>2</td><td>Amateur / Mediocre</td><td>You are a hobbyist or student with some basic training.</td>
+<td>2</td><td>Mediocre</td><td>You’ve got some basic know-how and can handle easy tasks.</td>
 </tr>
 <tr>
-<td>3</td><td>Rookie / Fair</td><td>You’re a junior professional, trained but lacking experience.</td>
+<td>3</td><td>Fair</td><td>You have competence at a junior-professional level, but lack finesse or experience.</td>
 </tr>
 <tr>
-<td>4</td><td>Professional / Good</td><td>You are a thoroughly competent professional.</td>
+<td>4</td><td>Good</td><td>You are thoroughly competent at a professional level. You succeed in most routine situations.</td>
 </tr>
 <tr>
-<td>5</td><td>Veteran / Great</td><td>You are a seasoned professional with a fair bit of experience.</td>
+<td>5</td><td>Great</td><td>You understand nuances and shortcuts, and can succeed even in challenging situations.</td>
 </tr>
 <tr>
-<td>6</td><td>Expert / Superb</td><td>You have significant experience to draw upon and are well-regarded in your field.</td>
+<td>6</td><td>Expert</td><td>You are an expert, and can pull through even in dire circumstances.</td>
 </tr>
 <tr>
-<td>7</td><td>Elite / Exceptional</td><td>You are one of the top people in your field, like an All Star athlete or a world-renowned doctor.</td>
+<td>7</td><td>Elite</td><td>You have mastered your field and few can compare. For example: an All Star athlete or world-renowned scientist.</td>
 </tr>
 <tr>
-<td>8</td><td>Legend / Legendary</td><td>You are one of the best that’s ever lived.</td>
+<td>8</td><td>Legendary</td><td>You are one of the best that’s ever lived. For example: Einstein or Beethoven.</td>
 </tr>
 </tbody>
 </table>
@@ -117,8 +117,7 @@ Character Name: {{input type="text" value=charName}}
 <p>A few tips for selecting Action Skills:</p>
 
 <ul>
-<li>The rating name should generally match your professional experience. While some variation is allowed for talent (or lack thereof), be careful not to stray too far. A brand-new pilot with an Elite piloting skill isn’t going to fly (pun intended).</li>
-<li>Ratings 3 or higher imply you’re is good enough to do this for a living. Hobbies don’t need to be that high unless you’re really serious about them.</li>
+<li>There is a general correspondence between the ratings and professional experience.  Amateur hobbyist/students should be about  Mediocre.  Junior professionals (rookies) and semi-pro hobbyist) should be about Fair.  Genearl professional levels are Good/Great.  Some variation is allowed for talent (or lack thereof) but don't go crazy.</li>
 <li>Skills are deliberately broad to simplify chargen.  Your character is expected to RP appropriately to their specialties.  For instance, a paramedic cannot perform brain surgery no matter how high their Medicine is.</li>
 <li>Rating 1 (Everyman) is a special rating. It reflects what the average inhabitant of the game world would be capable of. What tasks you can even conceivably attempt with Everyman will vary from skill to skill.</li>
 </ul>
@@ -143,27 +142,29 @@ Character Name: {{input type="text" value=charName}}
 
 <h2>Background Skills</h2>
 
-Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. Here are some sample Background Skills:
+<p>Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. You can see a list of sample Background Skills on the <a href="http://aresmush.com/fs3/fs3-3/core/">FS3 Core</a> page.   Background Skills are rated differently than Action Skills in a more descriptive fashion:</p>
 
 <ul>
-<li>A science - astronomy, biology, chemistry, geology, mathematics, physics, etc.</li>
-<li>A humanity - history, literature, psychology, philosophy, poetry, etc.</li>
-<li>A profession or trade - cook, waitress, bartender, accountant, programmer, carpenter, brewer, blacksmith, etc.</li>
-<li>A game - chess, roleplaying, poker, etc.</li>
-<li>An art - sculpting, painting, sketching, photography, etc.</li>
-<li>A form of expression - acting, singing, dancing, playing an instrument, writing, etc.</li>
-<li>A sport - baseball, football, gymnastics, etc.</li>
-<li>A craft or hobby - gardening, basketweaving, knitting, etc.</li>
-<li>An unusual interest - detective novels, game show hosts, etc.</li>
+<li>Interest - A casual hobby or interest. Rolled as rating 2.</li>
+<li>Profession - A profession or very serious hobby. Rolled as rating 4.</li>
+<li>Expertise - An area of significant knowledge or expertise. Rolled as rating 6.</li>
 </ul>
 
-<p>Tip: You are assumed to be an Everyman in any Background Skill not listed on your character sheet. So even if you don’t take the “football” skill, you’ve still probably played it a few times in gym class in school, watched it on TV, etc. You can always choose to roleplay as Unskilled if it fits better.</p>
+<p>A few tips for selecting Background Skills:</p>
 
-<p>Background Skills exist for RP flavor and character depth more than conflict resolution.  Because of that, they are <b>described</b>, not rated.   Just give a short sentence or so describing what your character knows and why.  For example:  <i>Pyramid - Marua played Pyramid in college.  She might have gone pro had she not joined the Navy.</i></p>
-
+<ul>
+<li>You are assumed to have the equivalent of Everyman rating in any Background Skill not listed on your character sheet. Don’t feel obliged to list every single thing your character has ever done - focus on the things that are important to you.
+</li>
+<li>
+Like Action Skills, Background Skills are deliberately broad. In RL, an engineer might have to take Calculus, Physics, Engineering and various other courses as part of their degree, but those can all be summed up generally as a single Background Skill of “Electrical Engineer”. Strive for a middle ground somewhere between listing each topic individually and lumping too much together (like a single skill of “Science” - that’s too big.)
+</li>
+</ul>
 
 {{#each bgskills as |skill|}}
-<p>Skill: {{input type="text" value=skill.name size=150}}</p>
+{{#fs3-bgbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+    <b>{{input type="text" value=skill.name size=150}}</b>
+{{/fs3-bgbox}}
+
 {{/each}}
 
 <button id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
@@ -171,11 +172,19 @@ Background Skills are free-form, so there is no specific list. You can pick anyt
 
 <h2>Languages</h2>
 
-<p>Languages represent the languages that your character can speak and/or read.  Like Background Skills, Languages have no ratings. If you have a Language, you’re assumed to be fluent and literate. You can always RP a lower degree of proficiency if appropriate to your background.</p>
+<p>Languages represent the languages that your character can speak and/or read.  Like Background Skills, Language Skills in a more descriptive fashion:</p>
+
+<ul>
+<li>Beginner - You know tourist-level common phrases like “my name is” and “where’s the bathroom”. Rolled as rating 2.</li>
+<li>Conversational - You can get by, but your phrasing is sometimes awkward and your vocabulary incomplete. Rolled as rating 4.</li>
+<li>Fluent - You are fully fluent in the language. Rolled as rating 6.</li>
+</ul>
 
 
 {{#each langskills as |skill|}}
-<p>Language: {{input type="text" value=skill.name size=150}}</p>
+{{#fs3-langbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+    <b>{{input type="text" value=skill.name size=150}}</b>
+{{/fs3-langbox}}
 {{/each}}
 
 <button id="addlang" {{action "addLanguage"}}>Add Language</button>

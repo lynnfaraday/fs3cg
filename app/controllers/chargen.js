@@ -24,12 +24,12 @@ export default Ember.Controller.extend({
     
     resetSkills: function() {
         let bg = [
-            Ember.Object.create( { name: "Describe a hobby, interest or professional background skill." })
+            Ember.Object.create( { name: "Skill Name" , rating: 1, ratingName: 'Interest' })
         ];
         this.set('bgskills', bg);
         
         let lang = [
-            Ember.Object.create( { name: "English" })
+            Ember.Object.create( { name: "Standard" , rating: 3, ratingName: 'Fluent' })
         ];
         this.set('langskills', lang);
         
@@ -144,17 +144,35 @@ export default Ember.Controller.extend({
             } 
         });
         
-        let numBg = this.get('bgskills').length;
-        if (numBg > 3)
-        {
-            totalSkills = totalSkills + numBg - 3;
+        fa = this.get('bgskills');
+        let bgPoints = 0;
+                Object.keys(fa).forEach(function (key) {
+                    let rating = fa[key]['rating'];
+                    bgPoints = bgPoints + rating;
+                });
+        
+        bgPoints = bgPoints - 3;
+        if (bgPoints < 0) {
+            bgPoints = 0;
         }
         
-        let numLang = this.get('langskills').length;
-        if (numLang > 1)
-        {
-            totalSkills = totalSkills + numLang - 1;
+        totalSkills = totalSkills + bgPoints;
+         
+        fa = this.get('langskills');
+        let langPoints = 0;
+                Object.keys(fa).forEach(function (key) {
+                    let rating = fa[key]['rating'];
+                    langPoints = langPoints + rating;
+                });
+        
+        langPoints = langPoints - 3;
+        if (langPoints < 0) {
+            langPoints = 0;
         }
+                   
+        totalSkills = totalSkills + langPoints;
+        
+        
         return totalSkills;
     },    
     countHigh: function(stats, highLimit) {     
@@ -212,11 +230,11 @@ export default Ember.Controller.extend({
     
     actions: {
         addBackgroundSkill() {
-            this.get('bgskills').pushObject( Ember.Object.create( { name: "" }) );  
+            this.get('bgskills').pushObject( Ember.Object.create( { name: "Skill Name" , rating: 1, ratingName: 'Interest' }) );  
             this.validateChar();
         },
         addLanguage() {
-            this.get('langskills').pushObject( Ember.Object.create( { name: "" }) );  
+            this.get('langskills').pushObject( Ember.Object.create( { name: "Language Name" , rating: 1, ratingName: 'Beginner' }) );  
             this.validateChar();
         },
         abilityChanged() {

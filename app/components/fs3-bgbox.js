@@ -2,38 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     minRating: 0,
-    maxRating: 8,
+    maxRating: 3,
     
     getRatingName: function() {
         let name = "";
         
         switch (this.rating) {
             case 0:
-                name = "Unskilled";
-                break;
-            case 1:
                 name = "Everyman";
                 break;
+            case 1:
+                name = "Interest";
+                break;
             case 2:
-                name =  "Mediocre";
+                name =  "Profession";
                 break;
             case 3:
-                name =  "Fair";
-                break;
-            case 4:
-                name =  "Good";
-                break;
-            case 5:
-                name = "Great";
-                break;
-            case 6:
-                name = "Expert";
-                break;
-            case 7:
-                name = "Elite";
-                break;
-            case 8:
-                name = "Legendary";
+                name =  "Expertise";
                 break;
         }
         return name;
