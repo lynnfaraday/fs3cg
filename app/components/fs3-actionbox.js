@@ -15,7 +15,7 @@ export default Ember.Component.extend({
                 name = "Everyman";
                 break;
             case 2:
-                name =  "Mediocre";
+                name =  "Amateur";
                 break;
             case 3:
                 name =  "Fair";
