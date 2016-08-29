@@ -151,7 +151,7 @@ export default Ember.Controller.extend({
                     bgPoints = bgPoints + rating;
                 });
         
-        bgPoints = bgPoints - 3;
+        bgPoints = bgPoints - 5;
         if (bgPoints < 0) {
             bgPoints = 0;
         }
