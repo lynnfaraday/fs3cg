@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     charName: 'Test',
     fs3attrs: [],
     fs3action: null,
-    selectedTheme: '100',
+    selectedTheme: 'Battlestar Galactica',
     attrErrors: [],
     skillErrors: [],
     langskills: [],
@@ -74,9 +74,9 @@ export default Ember.Controller.extend({
             Ember.Object.create( { name: "Gunnery", desc: "Vehicle and heavy weapons. (Reflexes)" }),
             Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
             Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
-            Ember.Object.create( { name: "Piloting", desc: "Flying Vipers, Raptors and airborne vehicles. (Reflexes)" }),
+            Ember.Object.create( { name: "Piloting", desc: "Flying spacecraft.  Viper pilots know how to fly Raptors, but not vice-versa. (Reflexes)" }),
             Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
-            Ember.Object.create( { name: "Technician", desc: "Mechanics, electronics and computers.. (Wits)" })
+            Ember.Object.create( { name: "Technician", desc: "Technical operation and repair.  Techs generally specialize in either electronics, mechanics or computers (includes ECO/CIC sensors). (Wits)" })
             ];           
         }
         else {
@@ -151,7 +151,7 @@ export default Ember.Controller.extend({
                     bgPoints = bgPoints + rating;
                 });
         
-        bgPoints = bgPoints - 5;
+        bgPoints = bgPoints - 6;
         if (bgPoints < 0) {
             bgPoints = 0;
         }
@@ -165,6 +165,11 @@ export default Ember.Controller.extend({
                     langPoints = langPoints + rating;
                 });
         
+        let freeLangs = 3;
+        if (this.get('selectedTheme') == "Battlestar Galactica")        
+        {
+            freeLangs = 5;
+        }
         langPoints = langPoints - 3;
         if (langPoints < 0) {
             langPoints = 0;
