@@ -6,11 +6,11 @@ String.prototype.capitalizeFirstLetter = function() {
 
 export default Ember.Controller.extend({
     
-    themes: [ '100', 'Battlestar Galactica', 'Modern Post-Apocalyptic'],
+    themes: [ '100', 'BSG Unification', 'Modern Post-Apocalyptic'],
     charName: 'Test',
     fs3attrs: [],
     fs3action: null,
-    selectedTheme: 'Battlestar Galactica',
+    selectedTheme: 'BSG Unification',
     attrErrors: [],
     skillErrors: [],
     langskills: [],
@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
             Ember.Object.create( { name: "Thrown", desc: "Thrown weapons. (Reflexes)" }),
             ];
         }
-        else if (this.get('selectedTheme') === "Battlestar Galactica") {
+        else if (this.get('selectedTheme') === "BSG Unification") {
             
             skills = [
             Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
@@ -166,11 +166,11 @@ export default Ember.Controller.extend({
                 });
         
         let freeLangs = 3;
-        if (this.get('selectedTheme') == "Battlestar Galactica")        
+        if (this.get('selectedTheme') == "BSG Unification")        
         {
             freeLangs = 5;
         }
-        langPoints = langPoints - 3;
+        langPoints = langPoints - freeLangs;
         if (langPoints < 0) {
             langPoints = 0;
         }
