@@ -66,17 +66,17 @@ export default Ember.Controller.extend({
         else if (this.get('selectedTheme') === "BSG Unification") {
             
             skills = [
-            Ember.Object.create( { name: "Alertness", desc: "Situational awareness. (Perception)" }),
+            Ember.Object.create( { name: "Alertness", desc: "Noticing things and being aware of your surroundings. (Perception)" }),
             Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
             Ember.Object.create( { name: "Composure", desc: "Coolness under pressure. (Grit)" }),
             Ember.Object.create( { name: "Demolitions", desc: "Blowing stuff up. (Wits)" }),
             Ember.Object.create( { name: "Firearms", desc: "Shooting guns. (Reflexes)" }),
             Ember.Object.create( { name: "Gunnery", desc: "Vehicle and heavy weapons. (Reflexes)" }),
-            Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
+            Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. Requires Specialty:  Doctor, Surgeon, Nurse, Medic, Other (Wits)" }),
             Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
-            Ember.Object.create( { name: "Piloting", desc: "Flying spacecraft.  Viper pilots know how to fly Raptors, but not vice-versa. (Reflexes)" }),
+            Ember.Object.create( { name: "Piloting", desc: "Flying spacecraft.  Requires Specialty:  Viper, Raptor, Freighter, Other (Reflexes)" }),
             Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
-            Ember.Object.create( { name: "Technician", desc: "Technical operation and repair.  Techs generally specialize in either electronics, mechanics or computers (includes ECO/CIC sensors). (Wits)" })
+            Ember.Object.create( { name: "Technician", desc: "General mechanics/electronics and fixing things. (Wits)" })
             ];           
         }
         else {
