@@ -1,0 +1,37 @@
+<br/><br/><hr/><br/><br/>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Character Commands</div>
+  
+  <div class="panel-body">
+  
+  <p class="alert alert-info"><b>Copy and paste these commands into an AresMUSH game to create your character.</b></p>
+    
+  {{#each fs3attrs as |att|}}
+ 
+  <p>ability {{att.name}}={{att.rating}}</p>
+
+  {{/each}}
+
+  {{#each fs3action as |skill|}}
+ 
+  <p>ability {{skill.name}}={{skill.rating}}</p>
+
+  {{/each}}
+
+  {{#each bgskills as |skill|}}
+  
+  <p>ability {{skill.name}}={{skill.rating}} </p>
+  
+  {{/each}}
+
+  {{#each langskills as |skill|}}
+  
+  <p>ability {{skill.name}}={{skill.rating}}</p>
+  
+  {{/each}}
+  
+  </div>
+  
+
+</div>
